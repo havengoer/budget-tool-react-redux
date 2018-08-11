@@ -1,50 +1,23 @@
-import React from 'react';
+import React, { Component } from "react";
 
-
-
-class Add extends React.Component {
-
+export default class Add extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-        description: 'Description',
-        amount: 'Amount'
-    };
-    this.add = this.add.bind(this);
-    this.handleChangeDesc = this.handleChangeDesc.bind(this);
-    this.handleChangeAmt = this.handleChangeAmt.bind(this);
+    super(props);
   }
 
-  handleChangeDesc(e) {
-      this.setState({
-          description: e.target.value
-      })
-  }
-  handleChangeAmt(e) {
-    this.setState({
-        amount: e.target.value
-    })
-}
-
-add() {
-   this.props.onAdd(this.state.description, this.state.amount)
-}
-  componentDidMount() {
-
-  }
- 
   render() {
-
-    return ( 
-      <div >
-          <input type="text" value={this.state.description} onChange={this.handleChangeDesc} />
-          <input type="text" value={this.state.amount} onChange={this.handleChangeAmt} />
-          <button>Add</button>
-      </div> 
+    return (
+      <div>
+        Amount
+        <form>
+        <input type="text" id="amount"/>
+        Item
+        <input type="text" id="item"/>
+        Category
+        <input type="text" id="category"/>
+        <button>Add</button>
+        </form>
+      </div>
     );
   }
-};
-
-
-
-export default Add;
+}

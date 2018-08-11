@@ -1,74 +1,84 @@
-import React, { Component} from "react";
-import * as d3 from "d3";
+import React, { Component } from 'react';
+import * as d3 from 'd3';
 
-class Chart extends Component{
+export default class Chart extends Component {
   constructor(props) {
-    super(props)
-
+    super(props);
   }
+
   componentDidMount() {
     this.initializeD3();
   }
 
-  componentWillMount() {
-  }
+  initializeD3() {
+    let width = 800;
+    const height = 250;
+    const radius = Math.min(width, height) / 2;
 
+    let color = d3.scale
+      .ordinal()
+      .range([
+        '#98abc5',
+        '#8a89a6',
+        '#7b6888',
+        '#6b486b',
+        '#a05d56',
+        '#d0743c',
+        '#ff8c00',
+      ]);
 
-  initializeD3 () {
-    var width = 800,
-    height = 250,
-    radius = Math.min(width, height) / 2;
+    let arc = d3.svg
+      .arc()
+      .outerRadius(radius - 10)
+      .innerRadius(radius - 70);
 
-var color = d3.scale.ordinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    let pie = d3.layout
+      .pie()
+      .sort(null)
+      .value((d) => {
+        return d.amount;
+      });
 
-var arc = d3.svg.arc()
-    .outerRadius(radius - 10)
-    .innerRadius(radius - 70);
+    let svg = d3
+      .select('#d3')
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .append('g')
+      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
-var pie = d3.layout.pie()
-    .sort(null)
-    .value(function (d) {
-    return d.amount;
-});
-
-    var svg = d3.select("#d3").append("svg")
-  .attr("width", width)
-  .attr("height", height)
-  .append("g")
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-  var g = svg.selectAll(".arc")
+    let g = svg
+      .selectAll('.arc')
       .data(pie(this.props.data))
-      .enter().append("g")
-      .attr("class", "arc");
+      .enter()
+      .append('g')
+      .attr('class', 'arc');
 
-  g.append("path")
-      .attr("d", arc)
-      .style("fill", function (d) {
-      return color(d.data.category);
-  });
+    g.append('path')
+      .attr('d', arc)
+      .style('fill', (d) => {
+        return color(d.data.category);
+      });
 
-  g.append("text")
-      .attr("transform", function (d) {
-      return "translate(" + arc.centroid(d) + ")";
-  })
-      .attr("dy", ".35em")
-      .style("text-anchor", "middle")
-      .text(function (d) {
-      return d.data.category;
-  });
+    g.append('text')
+      .attr('transform', (d) => {
+        return "translate(" + arc.centroid(d) + ")";
+      })
+      .attr('dy', '.35em')
+      .style('text-anchor', 'middle')
+      .text((d) => {
+        return d.data.category;
+      });
   }
-  render(){
-    console.log()
 
-    return(
-      <div >
-      <h1> Where My Moniez Went </h1>  
-     <div id="d3"></div>
-      </div> 
+  render() {
+    return (
+      <div>
+        <h1>
+          Where My Moniez Went
+        </h1>
+        <div id="d3" />
+      </div>
     );
   }
 }
-
-export default Chart;
