@@ -12,8 +12,8 @@ export default class Chart extends Component {
 
   initializeD3() {
     let width = 800;
-    var height = 250;
-    var radius = Math.min(width, height) / 2;
+    const height = 250;
+    const radius = Math.min(width, height) / 2;
 
     let color = d3.scale
       .ordinal()
@@ -75,9 +75,8 @@ export default class Chart extends Component {
     return (
       <div>
         <h1>
-{' '}
-Where My Moniez Went
-</h1>
+          Where My Moniez Went
+        </h1>
         <div id="d3" />
       </div>
     );

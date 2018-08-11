@@ -1,28 +1,26 @@
 import React, { Component } from "react";
-
 import TransactionList from "./TransactionList.jsx";
 import Add from "./Add.jsx";
-import Chart from "./Chart.jsx";
 
-var dataSet = [
+const dataSet = [
   {
     amount: -10,
-    description: "Chipotle",
+    item: "Chipotle",
     category: "Food"
   },
   {
     amount: 1000,
-    description: "Paycheck",
+    item: "Paycheck",
     category: "Food"
   },
   {
     amount: -400.5,
-    description: "Gas",
+    item: "Gas",
     category: "Transportation"
   },
   {
     amount: -40.5,
-    description: "Hair gel",
+    item: "Hair gel",
     category: "Misc"
   }
 ];
@@ -35,16 +33,19 @@ class App extends Component {
     this.state.total = 0;
   }
 
-  componentDidMount() {
-    this.setState({
-      data: dataSet,
-      total: dataSet.reduce((a, b) => {
-        return a + b.amount;
-      }, 0)
-    });
+  addTransaction(value) {
+    const amount = document.getElementById('amount');
+    const item = document.getElementById('item');
+    const category = document.getElementById('category');
+    const transaction = {
+      amount,
+      item,
+      category,
+    };
+    const copy = this.state.data.slice();
+    copy.push(transaction);
+    this.setState({ data });
   }
-
-  add(description, amount, category) {}
 
   render() {
     return (
@@ -52,7 +53,7 @@ class App extends Component {
         <h1>My Budget</h1>
         <Add onAdd={this.add} />
         <TransactionList transactions={this.state.data} />
-        <Chart data={this.state.data} />
+        {/* <Chart data={this.state.data} /> */}
       </div>
     );
   }

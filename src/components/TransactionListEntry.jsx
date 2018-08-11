@@ -1,23 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const TransactionListEntry = (props) => {
+const TransactionListEntry = props => {
   let style = {
-    color: props.total > 0 ? 'green' : 'red',
+    color: props.total > 0 ? "green" : "red"
   };
 
   return (
     <div className="divTableRow">
-      <div className="divTableCell">
-{props.transaction.amount}
-{' '}
- </div>
-      <div className="divTableCell"> 
-{' '}
-{props.transaction.description}
-</div>
-      <div className="divTableCell">
-{props.transaction.category}
-</div>
+      <div className="divTableCell">{props.transaction.amount} </div>
+      <div className="divTableCell"> {props.transaction.item}</div>
+      <div className="divTableCell">{props.transaction.category}</div>
     </div>
   );
 };
