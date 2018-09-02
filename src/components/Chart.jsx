@@ -7,6 +7,13 @@ export default class Chart extends Component {
   }
 
   componentDidMount() {
+    // d3.selectAll("#d3").remove();
+
+    this.initializeD3();
+  }
+  componentDidUpdate() {
+    d3.selectAll("#d3_piechart_container").remove();
+    d3.selectAll("svg").remove();
     this.initializeD3();
   }
 
@@ -42,6 +49,7 @@ export default class Chart extends Component {
     let svg = d3
       .select('#d3')
       .append('svg')
+      .attr("id", "d3_piechart_container")
       .attr('width', width)
       .attr('height', height)
       .append('g')

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TransactionList from "./TransactionList.jsx";
 import Add from "./Add.jsx";
+import Chart from "./Chart.jsx";
 
 const dataSet = [
   {
@@ -64,7 +65,7 @@ class App extends Component {
         <h1>My Budgetzzz</h1>
         <Add onAdd={this.addTransaction} />
         <TransactionList transactions={this.state.data} />
-        {/* <Chart data={this.state.data} /> */}
+        <Chart data={this.state.data} />
       </div>
     );
   }
