@@ -15,7 +15,7 @@ export default class Add extends Component {
         <input type="text" id="item"/>
         Category
         <input type="text" id="category"/>
-        <button>Add</button>
+        <button onClick= {this.props.onAdd }>Add</button>
         </form>
       </div>
     );

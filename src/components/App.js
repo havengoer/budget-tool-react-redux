@@ -31,27 +31,38 @@ class App extends Component {
     this.state = {};
     this.state.data = dataSet;
     this.state.total = 0;
+    this.addTransaction = this.addTransaction.bind(this);
+
   }
 
-  addTransaction(value) {
-    const amount = document.getElementById('amount');
-    const item = document.getElementById('item');
-    const category = document.getElementById('category');
+  addTransaction(e) {
+    e.preventDefault();
+    console.log('at addTransaction')
+    const amount = document.getElementById('amount').value;
+    const item = document.getElementById('item').value;
+    const category = document.getElementById('category').value;
+    console.log(  amount,
+      item,
+      category,)
     const transaction = {
       amount,
       item,
       category,
     };
-    const copy = this.state.data.slice();
-    copy.push(transaction);
-    this.setState({ data });
+    const newDataSet = this.state.data.slice();
+    newDataSet.push(transaction);
+    console.log("CONSOLE", newDataSet)
+    this.setState({ 
+      data: newDataSet
+     });
+    console.log(this)
   }
 
   render() {
     return (
       <div>
-        <h1>My Budget</h1>
-        <Add onAdd={this.add} />
+        <h1>My Budgetzzz</h1>
+        <Add onAdd={this.addTransaction} />
         <TransactionList transactions={this.state.data} />
         {/* <Chart data={this.state.data} /> */}
       </div>
