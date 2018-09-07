@@ -32,8 +32,8 @@ class App extends Component {
     this.state = {};
     this.state.data = dataSet;
     this.state.total = 0;
+    this.state.category = ['Food','Transportation', 'Misc', 'Entertainment'  ]
     this.addTransaction = this.addTransaction.bind(this);
-
   }
 
   addTransaction(e) {
