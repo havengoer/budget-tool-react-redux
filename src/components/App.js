@@ -1,3 +1,8 @@
+import {hot} from "react-hot-loader";
+import Menu from './Menu'
+
+import { BrowserRouter as Router, Route, hashHistory, Link } from "react-router-dom";
+
 import React, { Component } from "react";
 import TransactionList from "./TransactionList.jsx";
 import Add from "./Add.jsx";
@@ -62,13 +67,41 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>My Budgetzzz</h1>
-        <Add onAdd={this.addTransaction} />
+        {/* <Add onAdd={this.addTransaction} />
         <TransactionList transactions={this.state.data} />
-        <Chart data={this.state.data} />
+        <Chart data={this.state.data} /> */}
+    
+    <div className="appHouse">
+    <Router history={hashHistory}>
+      <div>
+        <div className="Logo">
+        <h1>Budget</h1>
+
+          <div className="navBar">
+          <ul>
+            <li><Link to='/chart'>Dashboard</Link></li>
+            <li className="customMiddleLink"><Link to='/add-transaction'>Add transaction</Link></li>
+            <li><Link to='/transaction-list'>transaction History</Link></li>
+          </ul>
+        </div>
+        </div>
+        <Route path="/chart" render={() => <Chart data={this.state.data} />} />
+        <Route path="/add-transaction" render={()=><Add onAdd={this.addTransaction} />}/>
+        <Route path="/transaction-list" render={()=><TransactionList transactions={this.state.data} />}/>
+        
+
+      
       </div>
-    );
+    </Router>
+  
+    </div>
+    </div>
+
+  );
   }
 }
 
-export default App;
+
+
+
+export default hot(module)(App);
